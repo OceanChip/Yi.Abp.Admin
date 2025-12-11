@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
-using TencentCloud.Tcr.V20190924.Models;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Caching;

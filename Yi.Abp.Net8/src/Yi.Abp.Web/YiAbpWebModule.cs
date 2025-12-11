@@ -280,22 +280,14 @@ namespace Yi.Abp.Web
                     };
                     options.Events = new JwtBearerEvents
                     {
-                        OnMessageReceived = context =>
+                        OnMessageReceived = messageContext =>
                         {
-                            //优先Query中获取，再去cookies中获取
-                            var accessToken = context.Request.Query["access_token"];
+                            //优先Query中获取
+                            var accessToken = messageContext.Request.Query["access_token"];
                             if (!string.IsNullOrEmpty(accessToken))
                             {
-                                context.Token = accessToken;
+                                messageContext.Token = accessToken;
                             }
-                            else
-                            {
-                                if (context.Request.Cookies.TryGetValue("Token", out var cookiesToken))
-                                {
-                                    context.Token = cookiesToken;
-                                }
-                            }
-
                             return Task.CompletedTask;
                         }
                     };
@@ -313,21 +305,13 @@ namespace Yi.Abp.Web
                     };
                     options.Events = new JwtBearerEvents
                     {
-                        OnMessageReceived = context =>
+                        OnMessageReceived = messageContext =>
                         {
-                            var refresh_token = context.Request.Headers["refresh_token"];
-                            if (!string.IsNullOrEmpty(refresh_token))
-                            {
-                                context.Token = refresh_token;
-                                return Task.CompletedTask;
-                            }
-
-                            var refreshToken = context.Request.Query["refresh_token"];
+                            var refreshToken = messageContext.Request.Query["refresh_token"];
                             if (!string.IsNullOrEmpty(refreshToken))
                             {
-                                context.Token = refreshToken;
+                                messageContext.Token = refreshToken;
                             }
-
                             return Task.CompletedTask;
                         }
                     };

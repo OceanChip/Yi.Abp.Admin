@@ -1,5 +1,4 @@
-﻿using TencentCloud.Tbm.V20180129.Models;
-using Volo.Abp.DependencyInjection;
+﻿using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Entities.Events;
 using Volo.Abp.EventBus;
 using Volo.Abp.EventBus.Local;
